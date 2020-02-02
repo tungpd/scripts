@@ -1,8 +1,8 @@
 #!/bin/sh
 
 set -e
-USER="pi"
-GROUP="pi"
+USER="tungpd"
+GROUP="tungpd"
 VHOME=/home/$USER
 SCRIPT_DIR=`pwd`
 
@@ -101,7 +101,7 @@ mkdir -p $VHOME/.vim && cd $VHOME/.vim
 wget https://raw.githubusercontent.com/JDevlieghere/dotfiles/master/.vim/.ycm_extra_conf.py
 cd ..
 chown $USER:$GROUP -R .vim
-ehco 'let g:ycm_use_clangd = 0' >> $VHOME/.vimrc
+echo 'let g:ycm_use_clangd = 0' >> $VHOME/.vimrc
 echo 'let g:ycm_global_ycm_extra_conf = "~/.vim/.ycm_extra_conf.py"' >> $VHOME/.vimrc
 
 # install TagBar pluggin
