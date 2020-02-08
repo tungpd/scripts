@@ -117,4 +117,7 @@ chown $USER:$GROUP -R $VHOME
 cd $VHOME
 pip install --user pipenv
 mkdir -p envs
-virtualenv -p $PYTHON3_BIN envs/py3
+virtualenv -p $PYTHON3_BIN $VHOME/envs/py3
+echo "alias py3=\"source $VHOME/envs/py3/bin/activate\"" >> $VHOME/.bashrc
+source $VHOME/.bashrc
+cd $VHOME
