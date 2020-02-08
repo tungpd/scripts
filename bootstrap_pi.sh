@@ -7,7 +7,10 @@ VHOME=/home/$USER
 SCRIPT_DIR=`pwd`
 
 PYTHON2_CONF_DIR=/usr/lib/python2.7/config-arm-linux-gnueabihf/
-PYTHON3_CONF_DIR=/usr/lib/python3.7/config-3.7m-arm-linux-gnueabihf/
+# PYTHON3_CONF_DIR=/usr/lib/python3.7/config-3.7m-arm-linux-gnueabihf/
+PYTHON3_CONF_DIR="`python3.7-config --configdir`"
+PYTHON2_BIN = "`which python2`"
+PYTHON3_BIN = "`which python3.7`"
 
 apt-get update
 apt-get install -y build-essential
@@ -110,7 +113,8 @@ git clone https://github.com/majutsushi/tagbar.git
 ##
 
 cd $VHOME
-
-
 chown $USER:$GROUP -R $VHOME
 cd $VHOME
+pip install --user pipenv
+mkdir -p envs
+virtualenv -p $PYTHON3_BIN envs/py3
