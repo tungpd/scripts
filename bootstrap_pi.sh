@@ -9,8 +9,8 @@ SCRIPT_DIR=`pwd`
 PYTHON2_CONF_DIR=/usr/lib/python2.7/config-arm-linux-gnueabihf/
 # PYTHON3_CONF_DIR=/usr/lib/python3.7/config-3.7m-arm-linux-gnueabihf/
 PYTHON3_CONF_DIR="`python3.7-config --configdir`"
-PYTHON2_BIN = "`which python2`"
-PYTHON3_BIN = "`which python3.7`"
+PYTHON2_BIN="`which python2`"
+PYTHON3_BIN="`which python3.7`"
 
 apt-get update
 apt-get install -y build-essential
