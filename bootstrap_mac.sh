@@ -20,8 +20,8 @@ echo "alias ll='ls -lG'" >> $VHOME/.bash_profile
 
 # xcode-select --install
 
-brew install python
-brew upgrade python
+# brew install python
+# brew upgrade python
 
 # install and config vim
 echo ">>>>>> install and config vim"
@@ -32,12 +32,13 @@ echo `pwd`
 git clone https://github.com/vim/vim.git
 cd vim
 echo ">>>>>>>run config vim"
-./configure --with-features=huge --enable-multibyte --enable-rubyinterp=yes --enable-pythoninterp=yes --with-python-config-dir=$PYTHON2_CONF_DIR --enable-python3interp=yes --with-python3-config-dir=$PYTHON3_CONF_DIR --enable-perlinterp=yes --enable-luainterp=yes --enable-gui=gtk2 --enable-cscope --prefix=/usr/local
+./configure --with-features=huge --enable-multibyte --enable-rubyinterp=yes --enable-python3interp=yes --with-python3-config-dir=$PYTHON3_CONF_DIR --enable-perlinterp=yes --enable-luainterp=yes --enable-gui=gtk2 --enable-cscope --prefix=/usr/local
 echo ">>>>>>> make vim"
 make
 
 echo ">>>>>> make install vim"
 sudo make install
+sudo ln -s /usr/local/bin/vim /usr/local/bin/vi
 echo ">>>>>>>>$VHOME"
 cd $VHOME
 chown -R $USER:$GROUP vim
@@ -46,7 +47,7 @@ chown -R $USER:$GROUP vim
 echo ">>>>> install vimrc pluggin"
 [ -d "./.vim_runtime" ] && sudo rm -rf $VHOME/.vim_runtime
 git clone --depth=1 https://github.com/amix/vimrc.git $VHOME/.vim_runtime
-$VHOME/.vim_runtime/install_awesome_parameterized.sh $VHOME/.vim_runtime --all
+$VHOME/.vim_runtime/install_awesome_parameterized.sh
 echo "set number" >> $VHOME/.vimrc
 chown -R $USER:$GROUP $VHOME/.vim_runtime
 chown $USER:$GROUP $VHOME/.vimrc
@@ -62,8 +63,8 @@ git submodule update --init --recursive
 # install deps
 echo ">>>>> install YouCompleteMe deps"
 echo "install golang"
-brew update
-brew install go
+# brew update
+# brew install go
 echo 'export GOPATH=$VHOME/go-workspace' >> $BASH_PROFILE
 echo 'export GOROOT=/usr/local/opt/go/libexec' >> $BASH_PROFILE
 echo 'export PATH=$PATH:$GOPATH/bin' >> $BASH_PROFILE
@@ -71,7 +72,7 @@ echo 'export PATH=$PATH:$GOROOT/bin' >> $BASH_PROFILE
 echo 'finish installing GO'
 
 cd $VHOME/.vim_runtime/my_plugins/YouCompleteMe
-python3 install.py --all
+python3 install.py --clangd-completer --go-completer --java-completer --ts-completer
 mkdir -p $VHOME/.vim && cd $VHOME/.vim
 wget https://raw.githubusercontent.com/JDevlieghere/dotfiles/master/.vim/.ycm_extra_conf.py
 cd ..
