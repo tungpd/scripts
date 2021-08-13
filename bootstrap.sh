@@ -95,6 +95,7 @@ pwd
 [ -d "./YouCompleteMe" ] && rm -rf YouCompleteMe
 git clone https://github.com/ycm-core/YouCompleteMe.git
 cd YouCompleteMe
+git checkout dbcc3b0e
 git submodule update --init --recursive
 # install deps
 echo ">>>>> install YouCompleteMe deps"
