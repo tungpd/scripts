@@ -93,6 +93,13 @@ mkdir -p $VHOME/.vim && cd $VHOME/.vim
 cd ..
 chown $USER:$GROUP -R .vim
 ehco 'let g:ycm_use_clangd = 0' >> $VHOME/.vimrc
+ehco 'let mapleader=","' >> $VHOME/.vim_runtime/my_configs.vim
+ehco 'nnoremap <leader>d :YcmCompleter GoToDeclaration<CR>' >> $VHOME/.vim_runtime/my_configs.vim
+ehco 'nnoremap <leader>r :YcmCompleter GoToReferences<CR>' >> $VHOME/.vim_runtime/my_configs.vim
+ehco 'nnoremap <leader>dd :YcmCompleter GetDoc<CR>' >> $VHOME/.vim_runtime/my_configs.vim
+ehco 'nnoremap <leader>t :YcmCompleter GetType<CR>' >> $VHOME/.vim_runtime/my_configs.vim
+
+
 # echo 'let g:ycm_global_ycm_extra_conf = "~/.vim/.ycm_extra_conf.py"' >> $VHOME/.vimrc
 
 # install TagBar pluggin
@@ -110,4 +117,11 @@ apt-get install libgl1-mesa-glx libegl1-mesa libxrandr2 libxrandr2 libxss1 libxc
 curl -O https://repo.anaconda.com/archive/Anaconda3-2023.09-0-Linux-x86_64.sh
 bash Anaconda3-2023.09-0-Linux-x86_64.sh
 # conda config --set auto_activate_base False
+
+# Jupyterhub
+sudo apt-get install nodejs npm
+python3 -m pip install jupyterhub
+npm install -g configurable-http-proxy
+python3 -m pip install jupyterlab notebook  # needed if running the notebook servers in the same environment
+
 
