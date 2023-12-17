@@ -92,12 +92,12 @@ mkdir -p $VHOME/.vim && cd $VHOME/.vim
 # wget https://raw.githubusercontent.com/JDevlieghere/dotfiles/master/.vim/.ycm_extra_conf.py
 cd ..
 chown $USER:$GROUP -R .vim
-ehco 'let g:ycm_use_clangd = 0' >> $VHOME/.vimrc
-ehco 'let mapleader=","' >> $VHOME/.vim_runtime/my_configs.vim
-ehco 'nnoremap <leader>d :YcmCompleter GoToDeclaration<CR>' >> $VHOME/.vim_runtime/my_configs.vim
-ehco 'nnoremap <leader>r :YcmCompleter GoToReferences<CR>' >> $VHOME/.vim_runtime/my_configs.vim
-ehco 'nnoremap <leader>dd :YcmCompleter GetDoc<CR>' >> $VHOME/.vim_runtime/my_configs.vim
-ehco 'nnoremap <leader>t :YcmCompleter GetType<CR>' >> $VHOME/.vim_runtime/my_configs.vim
+echo 'let g:ycm_use_clangd = 0' >> $VHOME/.vimrc
+echo 'let mapleader=","' >> $VHOME/.vim_runtime/my_configs.vim
+echo 'nnoremap <leader>d :YcmCompleter GoToDeclaration<CR>' >> $VHOME/.vim_runtime/my_configs.vim
+echo 'nnoremap <leader>r :YcmCompleter GoToReferences<CR>' >> $VHOME/.vim_runtime/my_configs.vim
+echo 'nnoremap <leader>dd :YcmCompleter GetDoc<CR>' >> $VHOME/.vim_runtime/my_configs.vim
+echo 'nnoremap <leader>t :YcmCompleter GetType<CR>' >> $VHOME/.vim_runtime/my_configs.vim
 
 
 # echo 'let g:ycm_global_ycm_extra_conf = "~/.vim/.ycm_extra_conf.py"' >> $VHOME/.vimrc
