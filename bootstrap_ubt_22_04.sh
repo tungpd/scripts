@@ -10,6 +10,7 @@ apt-get update
 apt-get install -y build-essential
 apt-get install -y git wget curl
 apt-get install -y git-buildpackage
+apt install -y openssh-server
 apt-get update && apt-get install -y debootstrap qemu-user-static git python3-dev python2-dev python2 python-dev-is-python3 cmake npm
 # install clang toolchains on ubuntu 18.04
 cd /tmp
@@ -109,8 +110,6 @@ git clone https://github.com/majutsushi/tagbar.git
 
 cd $VHOME
 
-
-
 # install anaconda
 cd /tmp
 apt-get install libgl1-mesa-glx libegl1-mesa libxrandr2 libxrandr2 libxss1 libxcursor1 libxcomposite1 libasound2 libxi6 libxtst6
@@ -124,4 +123,15 @@ python3 -m pip install jupyterhub
 npm install -g configurable-http-proxy
 python3 -m pip install jupyterlab notebook  # needed if running the notebook servers in the same environment
 
+#
+# stress test
+# https://lambdalabs.com/blog/perform-gpu-and-cpu-stress-testing-on-linux
+wget -nv -O- https://lambdalabs.com/install-lambda-stack.sh | sh -
 
+sudo apt-get install -y stress htop iotop lm-sensors
+cd /opt/
+git clone https://github.com/wilicc/gpu-burn
+cd gpu-burn
+make
+
+cd $VHOME
