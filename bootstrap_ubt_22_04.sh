@@ -6,6 +6,8 @@ USER="tung"
 GROUP="tung"
 VHOME=/home/$USER
 
+SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
+
 apt-get update
 apt-get install -y build-essential
 apt-get install -y git wget curl
@@ -34,8 +36,8 @@ sudo apt remove -y vim vim-runtime gvim
 sudo apt remove -y vim-tiny vim-common vim-gui-common vim-nox
 cd $VHOME
 echo `pwd`
-# [ -d "./vim" ] && rm -rf vim
-# git clone https://github.com/vim/vim.git
+[ -d "./vim" ] && rm -rf vim
+git clone https://github.com/vim/vim.git
 cd vim
 echo ">>>>>>>run config vim"
 ./configure --enable-pythoninterp=yes --with-python-config-dir=/usr/lib/python2.7/config-x86_64-linux-gnu --enable-python3interp=yes --with-python3-config-dir=/usr/lib/python3.10/config-3.10-x86_64-linux-gnu  --prefix=/usr/local
@@ -112,16 +114,40 @@ cd $VHOME
 
 # install anaconda
 cd /tmp
-apt-get install libgl1-mesa-glx libegl1-mesa libxrandr2 libxrandr2 libxss1 libxcursor1 libxcomposite1 libasound2 libxi6 libxtst6
+apt-get install -y libgl1-mesa-glx libegl1-mesa libxrandr2 libxrandr2 libxss1 libxcursor1 libxcomposite1 libasound2 libxi6 libxtst6
 curl -O https://repo.anaconda.com/archive/Anaconda3-2023.09-0-Linux-x86_64.sh
 bash Anaconda3-2023.09-0-Linux-x86_64.sh
 # conda config --set auto_activate_base False
 
 # Jupyterhub
-sudo apt-get install nodejs npm
-python3 -m pip install jupyterhub
+# run Jupyterhub in root
+#
+sudo -i
+cd $SCRIPT_DIR
+
+GITHUB_CLIENT_ID=$1
+GITHUB_CLIENT_SECRET=$2
+
+sudo apt-get install -y nodejs npm python3-pip
+python3 -m pip install -y jupyterhub
 npm install -g configurable-http-proxy
 python3 -m pip install jupyterlab notebook  # needed if running the notebook servers in the same environment
+python3 -m pip install oauthenticator
+mkdir /etc/jupyterhub & cp ./jupyterhub/jupyterhub_config.py /etc/jupyterhub
+
+cp ./jupyterhub/jupyterhub.service /etc/systemd/system
+sed -i "s/xxxx/${GITHUB_CLIENT_ID}/g" /etc/systemd/system/jupyterhub.service
+sed -i "s/yyyy/${GITHUB_CLIENT_SECRET}/g" /etc/systemd/system/jupyterhub.service
+systemctl enable jupyterhub.service
+systemctl start jupyterhub.service
+systemctl status jupyterhub.service
+su -l tung
+
+sudo apt-get install ibus-unikey
+ibus restart
+
+sudo apt install flameshot
+
 
 #
 # stress test
