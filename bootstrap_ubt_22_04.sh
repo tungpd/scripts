@@ -60,7 +60,6 @@ chown $USER:$GROUP -R vim
 echo ">>>>> install vimrc pluggin"
 [ -d "./.vim_runtime" ] && rm -rf $VHOME/.vim_runtime
 git clone --depth=1 git@github.com:tungpd/vimrc.git $VHOME/.vim_runtime
-$VHOME/.vim_runtime/install_awesome_parameterized.sh $VHOME/.vim_runtime --all
 echo "set number" >> $VHOME/.vimrc
 chown $USER:$GROUP -R $VHOME/.vim_runtime
 chown $USER:$GROUP $VHOME/.vimrc
@@ -103,6 +102,8 @@ echo 'nnoremap <leader>dd :YcmCompleter GetDoc<CR>' >> $VHOME/.vim_runtime/my_co
 echo 'nnoremap <leader>t :YcmCompleter GetType<CR>' >> $VHOME/.vim_runtime/my_configs.vim
 
 
+chown $USER:$GROUP -R $VHOME/.vim_runtime/my_plugins/YouCompleteMe
+$VHOME/.vim_runtime/install_awesome_parameterized.sh $VHOME/.vim_runtime --all
 # echo 'let g:ycm_global_ycm_extra_conf = "~/.vim/.ycm_extra_conf.py"' >> $VHOME/.vimrc
 
 # install TagBar pluggin
